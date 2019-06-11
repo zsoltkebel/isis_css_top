@@ -1,3 +1,5 @@
+@echo on
+
 set "M2_HOME=C:\apache-maven-3.5.0-bin\apache-maven-3.5.0"
 
 set "TOP=%~dp0%"
@@ -5,26 +7,48 @@ set "SRC_DIR=%TOP%"
 set "MAVEN_OPTS=-Xmx4096m"
 set "OPTS=-s \"%TOP%\org.csstudio.sns\build\settings.xml\" clean verify"
 
+for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-8*" ) do SET "JDKDIR=%%I"
+
+if "%JDKDIR%" == "" (
+	@echo "ERROR: Cannot find JDK 8 - please check/install"
+	@echo Oracle Java will no longer be found/used - please install OpenJDK https://adoptopenjdk.net/releases.html#x64_win
+	goto error
+)
+
+if not exist "%JDKDIR%\jre\lib\ext\jfxrt.jar" (
+    @echo "JDK has not been patched to include javafx support, you will be unable to build"
+	@echo "Follow instructions at https://github.com/ISISComputingGroup/ibex_developers_manual/wiki/Upgrade-Java#additional-optional-steps-for-developer-installations-not-required-on-instruments"
+	goto error
+)
+
+set "JAVA_HOME=%JDKDIR%"
+
 cd %TOP%\diirt
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%\maven-osgi-bundles
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%\cs-studio-thirdparty
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%\cs-studio\core
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%\cs-studio\applications
-mvn %OPTS%
+call mvn %OPTS%
 
 set "CSS_REPO=%TOP%\org.csstudio.sns\css_repo\"
 cd %TOP%\org.csstudio.display.builder
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%\org.csstudio.sns
-mvn %OPTS%
+call mvn %OPTS%
 
 cd %TOP%
+
+@echo "Build successful."
+GOTO :EOF
+
+:ERROR
+@echo "Build failed."
