@@ -43,9 +43,9 @@ cd %TOP%\cs-studio\applications
 call mvn %OPTS%
 if %errorlevel% neq 0 goto error
 
-set "CSS_REPO=%TOP%\org.csstudio.sns\css_repo\"
 cd %TOP%\org.csstudio.display.builder
-call mvn %OPTS%
+REM display builder needs an extra env variable setting for where to find the css repo.
+call mvn -Dcss_repo="file:%TOP%\org.csstudio.sns\css_repo\" %OPTS%
 if %errorlevel% neq 0 goto error
 
 cd %TOP%\org.csstudio.sns
