@@ -1,2 +1,12 @@
 # isis_css_top
 top level repository for build of cs-studio with isis customisations
+
+Note:
+The CSS repos should be pinned at these specific versions:
+
+cs-studio-thirdparty - 5d9eb92ced5372c64ac37693ab1f4c16dae01f0f
+diirt - 5baa4d15c546c6df10356a266837a0622b56e423
+maven-osgi-bundles - 174629309dab59ee2852e0272fe31a24cecb41ed
+org.csstudio.display.builder - b8eda4fb6fe27012ff07899d125faa3a29abcc08
+
+The ISIS repos are ok to be on master as we have forks of these.

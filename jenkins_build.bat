@@ -25,25 +25,32 @@ set "JAVA_HOME=%JDKDIR%"
 
 cd %TOP%\diirt
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%\maven-osgi-bundles
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%\cs-studio-thirdparty
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%\cs-studio\core
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%\cs-studio\applications
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 set "CSS_REPO=%TOP%\org.csstudio.sns\css_repo\"
 cd %TOP%\org.csstudio.display.builder
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%\org.csstudio.sns
 call mvn %OPTS%
+if %errorlevel% neq 0 goto error
 
 cd %TOP%
 
