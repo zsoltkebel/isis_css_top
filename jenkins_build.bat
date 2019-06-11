@@ -45,7 +45,7 @@ if %errorlevel% neq 0 goto error
 
 cd %TOP%\org.csstudio.display.builder
 REM display builder needs an extra env variable setting for where to find the css repo.
-call mvn -Dcss_repo="file:%TOP%\org.csstudio.sns\css_repo\" %OPTS%
+call mvn -Dcss_repo="file:%TOP:~2%org.csstudio.sns\css_repo" %OPTS%
 if %errorlevel% neq 0 goto error
 
 cd %TOP%\org.csstudio.sns
