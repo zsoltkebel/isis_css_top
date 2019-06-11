@@ -11,7 +11,7 @@ build.bat
 
 # Notes
 
-The CSS repos should be pinned at these specific versions:
+The CSS repos should be pinned at the following specific versions. Later versions merge in Phoebus code which is incompatible with our code-base so we cannot use them yet (it requires java 11 and java-FX).
 
 - cs-studio-thirdparty: 5d9eb92ced5372c64ac37693ab1f4c16dae01f0f
 - diirt: 5baa4d15c546c6df10356a266837a0622b56e423
