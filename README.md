@@ -6,7 +6,7 @@ Top level repository for build of cs-studio with isis customisations
 
 ```
 git clone --recursive https://github.com/ISISComputingGroup/isis_css_top.git
-jenkins_build.bat
+build.bat
 ```
 
 # Notes
