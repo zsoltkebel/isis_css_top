@@ -30,14 +30,8 @@ pipeline {
         }
         
         bat """
-            jenkins_build.bat
+            build.bat
             """
-      }
-    }
-    
-    stage("Unit Tests") {
-      steps {
-        junit '**/surefire-reports/TEST-*.xml'
       }
     }
     
