@@ -4,18 +4,18 @@ set "M2_HOME=C:\apache-maven-3.5.0-bin\apache-maven-3.5.0"
 
 set "TOP=%~dp0%"
 set "SRC_DIR=%TOP%"
-set "MAVEN_OPTS=-Xmx4096m"
+set "MAVEN_OPTS=-Xmx4096m -Dmaven.javadoc.skip=true"
 set "OPTS=-s \"%TOP%\org.csstudio.sns\build\settings.xml\" clean verify"
 
-for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-8*" ) do SET "JDKDIR=%%I"
+for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-11*" ) do SET "JDKDIR=%%I"
 
 if "%JDKDIR%" == "" (
-	@echo "ERROR: Cannot find JDK 8 - please check/install"
+	@echo "ERROR: Cannot find JDK 11 - please check/install"
 	@echo Oracle Java will no longer be found/used - please install OpenJDK https://adoptopenjdk.net/releases.html#x64_win
 	goto error
 )
 
-if not exist "%JDKDIR%\jre\lib\ext\jfxrt.jar" (
+if not exist "%JDKDIR%\lib\javafx.base.jar" (
     @echo "JDK has not been patched to include javafx support, you will be unable to build"
 	@echo "Follow instructions at https://github.com/ISISComputingGroup/ibex_developers_manual/wiki/Upgrade-Java#additional-optional-steps-for-developer-installations-not-required-on-instruments"
 	goto error
