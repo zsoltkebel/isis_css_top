@@ -2,12 +2,43 @@
 
 Top level repository for build of cs-studio with isis customisations
 
-# Developer build
+# Developer build (maven)
 
 ```
 git clone --recursive https://github.com/ISISComputingGroup/isis_css_top.git
 build.bat
 ```
+
+# Developer build (eclipse)
+
+First you will need to build via maven as above.
+
+Next:
+- Create a new target platform definition
+- Add the following directories to your new target platform definition:
+  * `cs-studio-thirdparty/repository/target/repository`
+  * `diirt/p2/target/repository`
+  * `maven-osgi-bundles/repository/target/repository`
+  * `org.csstudio.display.builder/repository/target/repository`
+  * `org.csstudio.sns/repository/target/repository`
+- Set it as the "active" target platform definition
+- Next, import all of the features from `org.csstudio.sns` into your IDE
+- Under `org.csstudio.sns/repository` find `basic-epics.product`
+- Open this product and synchronize it with the current target platform state
+- Click on the "contents" tab, and for each feature that can't be resolved:
+  * Import the relevant **feature** projects into eclipse. Note, you do not need to import the plugins themselves, just the features that define them are sufficient.
+- Ensure all imported projects are set to use JDK8 with a compiler compliance of 1.8. Also ensure that [your java 8 installation is patched with JAVAFX](https://github.com/ISISComputingGroup/ibex_developers_manual/wiki/Upgrade-Java#additional-optional-steps-for-developer-installations-not-required-on-instruments).
+- You should now have a project with no build errors in eclipse - however it will not launch at this time due to dependency version conflicts
+- Go into the run configurations menu and select "plugins"
+- Add required plugins
+- Press validate plugins. This may report some errors, you need to fix these. Sometimes eclipse selects a newer dependency version when it actually required an older one.
+- Ensure the following plugins are added explicitly:
+  * `org.eclipse.equinox.ds`
+  * `org.eclipse.equinox.event`
+- You should now have a validation which reports no errors.
+- In the run configurations menu select the box to "clear workspace before launching"
+- Press apply and save
+- Launch!
 
 # Notes
 
