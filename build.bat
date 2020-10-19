@@ -34,9 +34,6 @@ REM Build everything else.
 call mvn clean verify -Dcsstudio.composite.repo=%TOP%\cs-studio\p2repo -DskipTests=true
 if %errorlevel% neq 0 goto error
 
-RERM call mvn %OPTS%
-REM if %errorlevel% neq 0 goto error
-
 cd %TOP%
 
 @echo "Build successful."
