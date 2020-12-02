@@ -1,18 +1,3 @@
-[submodule "diirt"]
-	path = diirt
-	url = https://github.com/diirt/diirt
-[submodule "maven-osgi-bundles"]
-	path = maven-osgi-bundles
-	url = https://github.com/ControlSystemStudio/maven-osgi-bundles
-[submodule "cs-studio-thirdparty"]
-	path = cs-studio-thirdparty
-	url = https://github.com/ControlSystemStudio/cs-studio-thirdparty
 [submodule "cs-studio"]
 	path = cs-studio
 	url = https://github.com/IsisComputingGroup/cs-studio
-[submodule "org.csstudio.display.builder"]
-	path = org.csstudio.display.builder
-	url = https://github.com/kasemir/org.csstudio.display.builder
-[submodule "org.csstudio.sns"]
-	path = org.csstudio.sns
-	url = https://github.com/IsisComputingGroup/org.csstudio.sns
