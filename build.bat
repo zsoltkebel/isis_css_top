@@ -41,3 +41,5 @@ GOTO :EOF
 
 :ERROR
 @echo "Build failed."
+
+exit /b 1
