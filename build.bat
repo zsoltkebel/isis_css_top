@@ -7,7 +7,7 @@ set "SRC_DIR=%TOP%"
 set "MAVEN_OPTS=-Xmx4096m"
 set "OPTS=-s \"%TOP%\org.csstudio.sns\build\settings.xml\" clean verify"
 
-for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-11*" ) do SET "JDKDIR=%%I"
+for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-11*" "C:\Program Files\Eclipse Adoptium\jdk-11*" ) do SET "JDKDIR=%%I"
 
 if "%JDKDIR%" == "" (
 	@echo "ERROR: Cannot find JDK 11 - please check/install"
