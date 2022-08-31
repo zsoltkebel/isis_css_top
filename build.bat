@@ -27,11 +27,11 @@ set "JAVA_HOME=%JDKDIR%"
 REM Build maven-osgi-bundles to ensure all bundles are available for Tycho resolution.
 cd %TOP%\cs-studio
 
-call mvn -f maven-osgi-bundles/pom.xml clean verify
+call mvn -f maven-osgi-bundles/pom.xml -Dmaven.repo.local=%~dp0\.m2 clean verify
 if %errorlevel% neq 0 goto error
 
 REM Build everything else.
-call mvn clean verify -Dcsstudio.composite.repo=%TOP%\cs-studio\p2repo -DskipTests=true
+call mvn clean verify -Dcsstudio.composite.repo=%TOP%\cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%~dp0\.m2 
 if %errorlevel% neq 0 goto error
 
 cd %TOP%
