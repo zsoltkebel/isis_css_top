@@ -5,7 +5,7 @@ REM %1 is branch name
 set "BRANCH=%1"
 
 set "TOP=%~dp0"
-set "PROD_DIR=%TOP%cs-studio\repository\target\products"
+set "PROD_DIR=%TOP%cs-studio\product\repository\target\products"
 
 if "%BRANCH%" == "" (
     robocopy "%PROD_DIR%" "\\isis.cclrc.ac.uk\inst$\Kits$\CompGroup\ICP\CSStudio\BUILD-%BUILD_NUMBER%" "*.zip" -MIR -MT -NP -R:1 
