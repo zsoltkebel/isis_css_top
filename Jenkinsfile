@@ -54,7 +54,7 @@ pipeline {
 	}
  
   }
-    
+   post { 
       cleanup {
           bat """
                   @echo Jenkins Cleanup step complete
@@ -66,6 +66,7 @@ pipeline {
                   exit /b 0
           """
         }
+	}
 		
   // The options directive is for configuration that applies to the whole job.
   options {
