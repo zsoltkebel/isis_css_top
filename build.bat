@@ -53,10 +53,10 @@ if /i "%2" == "products" (
 
 cd %TOP%
 
-@echo "Build successful."
+@echo Build successful.
 GOTO :EOF
 
 :ERROR
-@echo "Build failed."
+@echo Build failed.
 
 exit /b 1
