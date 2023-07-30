@@ -84,6 +84,6 @@ pipeline {
                     notifyRepeatedFailure: true,
                     notifyUnstable: true,
                     url: "${env.MSTEAMS_URL}"
-            ]]
+            ]])
   }
 }
