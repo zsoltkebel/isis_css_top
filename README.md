@@ -9,6 +9,19 @@ git clone --recursive https://github.com/ISISComputingGroup/isis_css_top.git
 build.bat
 ```
 
+To build without an initial clean use
+```
+build.bat noclean
+```
+
+To save time if you have already done a full build and 
+subsequently only modify the `cs-studio\product\repository` area you can use
+```
+build.bat noclean products
+```
+
+Uncomment line to add `-e -X` flags to maven in `build.bat` for debugging information
+  
 # Developer build (eclipse)
 
 First you will need to build via maven as above.
