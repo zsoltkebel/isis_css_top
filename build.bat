@@ -1,11 +1,24 @@
 @echo on
+setlocal enabledelayedexpansion
 
-set "M2_HOME=C:\apache-maven-3.5.0-bin\apache-maven-3.5.0"
+REM %1 can be "noclean" to skip the maven clean phase
+REM %2 can be "products" to just do the products directory
 
-set "TOP=%~dp0%"
+for %%i in ( mvn.cmd ) do set "M2_HOME=%%~dp$PATH:i.."
+
+set "MY_ARGS=clean verify"
+if /i "%1" == "noclean" (
+    set "MY_ARGS=verify"
+)
+
+set "TOP=%~dp0"
 set "SRC_DIR=%TOP%"
+
+REM uncomment this to debug
+REM set "MY_ARGS=%MY_ARGS% -e -X"
+
+REM these are maven jvm options
 set "MAVEN_OPTS=-Xmx4096m"
-set "OPTS=-s \"%TOP%\org.csstudio.sns\build\settings.xml\" clean verify"
 
 for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-11*" "C:\Program Files\Eclipse Adoptium\jdk-11*" ) do SET "JDKDIR=%%I"
 
@@ -14,7 +27,6 @@ if "%JDKDIR%" == "" (
 	@echo Oracle Java will no longer be found/used - please install OpenJDK https://adoptopenjdk.net/releases.html#x64_win
 	goto error
 )
-
 
 if not exist "%JDKDIR%\lib\javafx.base.jar" (
     @echo "JDK has not been patched to include javafx support, you will be unable to build"
@@ -25,21 +37,26 @@ if not exist "%JDKDIR%\lib\javafx.base.jar" (
 set "JAVA_HOME=%JDKDIR%"
 
 REM Build maven-osgi-bundles to ensure all bundles are available for Tycho resolution.
-cd %TOP%\cs-studio
+cd %TOP%cs-studio
 
-call mvn -f maven-osgi-bundles/pom.xml -Dmaven.repo.local=%~dp0\.m2 clean verify
-if %errorlevel% neq 0 goto error
+if /i "%2" == "products" (
+    call mvn %MY_ARGS% -f product/pom.xml -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
+    if !errorlevel! neq 0 goto error
+) else (
+    call mvn %MY_ARGS% -f maven-osgi-bundles/pom.xml -Dmaven.repo.local=%TOP%.m2\repository
+    if !errorlevel! neq 0 goto error
 
-REM Build everything else.
-call mvn clean verify -Dcsstudio.composite.repo=%TOP%\cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%~dp0\.m2 
-if %errorlevel% neq 0 goto error
+    REM Build everything else.
+    call mvn %MY_ARGS% -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
+    if !%errorlevel! neq 0 goto error
+)
 
 cd %TOP%
 
-@echo "Build successful."
+@echo Build successful.
 GOTO :EOF
 
 :ERROR
-@echo "Build failed."
+@echo Build failed.
 
 exit /b 1
