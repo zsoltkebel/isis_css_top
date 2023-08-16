@@ -40,14 +40,14 @@ REM Build maven-osgi-bundles to ensure all bundles are available for Tycho resol
 cd %TOP%cs-studio
 
 if /i "%2" == "products" (
-    call mvn %MY_ARGS% -f product/pom.xml -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
+    call mvn %MY_ARGS% -f product/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
     if !errorlevel! neq 0 goto error
 ) else (
-    call mvn %MY_ARGS% -f maven-osgi-bundles/pom.xml -Dmaven.repo.local=%TOP%.m2\repository
+    call mvn %MY_ARGS% -f maven-osgi-bundles/pom.xml -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dmaven.repo.local=%TOP%.m2\repository
     if !errorlevel! neq 0 goto error
 
     REM Build everything else.
-    call mvn %MY_ARGS% -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
+    call mvn %MY_ARGS% -Dcs-studio=false -Declipse=false -Dtycho.localArtifacts=ignore -Dcsstudio.composite.repo=%TOP%cs-studio\p2repo -DskipTests=true -Dmaven.repo.local=%TOP%.m2\repository
     if !%errorlevel! neq 0 goto error
 )
 
