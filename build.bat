@@ -60,7 +60,7 @@ if !errorlevel! geq 4 (
 )
 
 @echo Build successful.
-GOTO :EOF
+exit /b 0
 
 :ERROR
 @echo Build failed.
