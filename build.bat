@@ -35,6 +35,7 @@ if not exist "%JDKDIR%\lib\javafx.base.jar" (
 )
 
 set "JAVA_HOME=%JDKDIR%"
+set "PATH=%JAVA_HOME%\bin;%PATH%"
 
 REM Build maven-osgi-bundles to ensure all bundles are available for Tycho resolution.
 cd %TOP%cs-studio
