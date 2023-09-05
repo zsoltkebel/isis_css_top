@@ -53,6 +53,11 @@ if /i "%2" == "products" (
 )
 
 cd %TOP%
+robocopy "%JAVA_HOME%" "%TOP%\jre" -MIR -MT -NP -R:1 -NDL -NFL -LOG:NUL
+if !errorlevel! geq 4 (
+	@echo ERROR: robocopy
+	exit /b 1
+)
 
 @echo Build successful.
 GOTO :EOF
