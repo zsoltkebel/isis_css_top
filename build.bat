@@ -18,8 +18,10 @@ REM uncomment this to debug
 REM set "MY_ARGS=%MY_ARGS% -e -X"
 
 REM these are maven jvm options
-REM set "MAVEN_OPTS=-Xmx4096m -Djdk.util.zip.disableZip64ExtraFieldValidation=true"
 set "MAVEN_OPTS=-Xmx4096m"
+
+REM general JVM options also for eclipse/tycho
+set "JAVA_TOOL_OPTIONS=-Djdk.util.zip.disableZip64ExtraFieldValidation=true"
 
 for /D %%I in ( "C:\Program Files\AdoptOpenJDK\jdk-11*" "C:\Program Files\Eclipse Adoptium\jdk-11*" ) do SET "JDKDIR=%%I"
 
