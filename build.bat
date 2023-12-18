@@ -6,7 +6,7 @@ REM %2 can be "products" to just do the products directory
 
 for %%i in ( mvn.cmd ) do set "M2_HOME=%%~dp$PATH:i.."
 
-set "MY_ARGS=clean verify"
+set "MY_ARGS=-T 1C clean verify"
 if /i "%1" == "noclean" (
     set "MY_ARGS=verify"
 )
