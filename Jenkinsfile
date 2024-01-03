@@ -66,6 +66,15 @@ pipeline {
                   exit /b 0
           """
         }
+      always {
+        logParser ([
+            projectRulePath: 'parse_rules',
+            parsingRulesPath: '',
+            showGraphs: true, 
+            unstableOnWarning: true,
+            useProjectRule: true,
+        ])
+      }
 	}
 		
   // The options directive is for configuration that applies to the whole job.
